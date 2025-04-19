@@ -68,7 +68,9 @@ public class AIcontroller : MonoBehaviour
            statemachine.Update();
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, WhatIsPlayer);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, WhatIsPlayer);
-         
+        Patrolling();
+        ChasePlayer();
+         AttackPlayer();
     }
 
     private void Awake()
@@ -76,8 +78,6 @@ public class AIcontroller : MonoBehaviour
         PlayerTransform = GameObject.FindGameObjectWithTag("Body").transform;
         Nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-       
-       
     }
 
     public bool CanSeePlayer()
@@ -204,16 +204,19 @@ public class AIcontroller : MonoBehaviour
     {
         if (PlayerInSightRange && !PlayerInAttackRange)
         {
-            // GameObject.FindGameObjectWithTag("Woman").GetComponent<AudioSource>().PlayOneShot(Chasing, 0.1f);
-
+           // GameObject.FindGameObjectWithTag("Woman").GetComponent<AudioSource>().PlayOneShot(Chasing, 0.1f);
+           
             anim.Play("chase");
             Nav.SetDestination(PlayerTransform.position);
         }
-        else
+        else 
         {
             Patrolling();
+           
         }
+       
         
+    
         //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * PatrolSpeed);
         //Vector3 direction = (player.position - transform.position).normalized;
         //if (direction != Vector3.zero)
@@ -232,16 +235,16 @@ public class AIcontroller : MonoBehaviour
         //    return;
         //}
         //rotate the Ai toward the next waypoint
+        
         if (!PlayerInSightRange && !PlayerInAttackRange)
-        { 
+        {
             anim.Play("Walk");
-        if (!walKPointSet) SearchWalkPoint();
-        if (walKPointSet) Nav.SetDestination(WalkPoint);
-        Vector3 distanceToWalkPoint = transform.position - WalkPoint;
-        if (distanceToWalkPoint.magnitude < 1f)
-            walKPointSet = false;
-    }
-       
+            if (!walKPointSet) SearchWalkPoint();
+            if (walKPointSet) Nav.SetDestination(WalkPoint);
+            Vector3 distanceToWalkPoint = transform.position - WalkPoint;
+            if (distanceToWalkPoint.magnitude < 1f)
+                walKPointSet = false;
+        }
 
         //Transform targetWayPoint = patrolWayPoints[currentWaypointsIndex];
         //Vector3 direction = (targetWayPoint.position - transform.position).normalized;

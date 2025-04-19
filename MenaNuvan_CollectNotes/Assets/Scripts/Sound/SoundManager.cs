@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
     }
     //If you want to add a sound effect like shoot or destroy
     //SoundManager.Instance.PlaySound3D("Name", transform.position);
-    public void Playsound3D(AudioClip clip,Vector3 pos)
+    public void playsound3D(AudioClip clip,Vector3 pos)
     {
         if (clip != null)
         {
@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound3D(string soundName, Vector3 pos)
     {
-        Playsound3D(sfxlibrary.GetClipsFromName(soundName), pos);
+        playsound3D(sfxlibrary.GetClipsFromName(soundName), pos);
     }
     public void PlaySound2D(string soundName)
     {

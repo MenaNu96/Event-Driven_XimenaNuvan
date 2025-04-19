@@ -21,17 +21,22 @@ public class StatePatrol : State
         {
             Ai.ChangeState(new StateChase(Ai));
 
+           // Debug.Log("Can see player");
         }
-
+        else if (Ai.CanHearPlayer(Ai.playervolume) && !Ai.CanSeePlayer())
+        {
+            Ai.ChangeState(new StateSearch( Ai));
+        } 
         else
         {
-            Ai.patrol();
+           // Debug.Log("Player line of sight lost");
+            Ai.Patrolling();
         }
     }
 
 
     public override void Exit()
     {
-        Debug.Log("Exit Patrol state");
+        //Debug.Log("Exit Patrol state");
     }
 }

@@ -79,7 +79,7 @@ public class NotesAndSound : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
        
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Body"))
         {
             PickUpText.SetActive(true);
             inReach = true;
@@ -90,7 +90,7 @@ public class NotesAndSound : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Body"))
         {
             PickUpText.SetActive(false);
             inReach = false;

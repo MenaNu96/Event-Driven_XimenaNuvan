@@ -20,6 +20,7 @@ public class StateMachine
 
     public void Update()
     {
+
         if (currentState != null)
         {
             currentState.Update();

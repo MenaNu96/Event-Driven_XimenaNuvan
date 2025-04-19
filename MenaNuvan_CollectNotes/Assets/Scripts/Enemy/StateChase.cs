@@ -17,9 +17,10 @@ public class StateChase : State
 
     public override void Update()
     {
-        Ai.Chase();
+        Ai.ChasePlayer();
         if(!Ai.CanSeePlayer())
         {
+
             Ai.ChangeState(new StatePatrol(Ai));
         }
     }
